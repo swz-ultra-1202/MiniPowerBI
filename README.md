@@ -158,24 +158,109 @@ Includes:
 
 ---
 
-## ▶️ Installation
+# ▶️ Installation Guide
 
-### Install dependencies
+## **1️⃣ Install dependencies (requirements.txt)**
+
+If you have a `requirements.txt`, install everything with:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-If you don’t have a `requirements.txt` file, I can generate one for you.
+### 🔍 If pip shows permission errors:
 
-### Run the Streamlit app
+```bash
+pip install --user -r requirements.txt
+```
+
+### 🔍 If Streamlit or sklearn fails to install:
+
+```bash
+pip install --upgrade pip setuptools wheel
+```
+
+---
+
+## **2️⃣ Run the Streamlit app**
 
 ```bash
 streamlit run main.py
 ```
 
-### Open in browser
+### Open the app in your browser:
 
 ```
 http://localhost:8501
 ```
+
+---
+
+# ⚡ Windows Setup Script (.bat File)
+
+Below is the improved version of your `.bat` script with clean formatting.
+Save it as: **setup_and_run.bat**
+
+```bat
+@echo off
+REM ============================================================
+REM  Make Any Windows System Compatible for Streamlit Project
+REM  Includes: Virtual Environment, Dependencies, Run App
+REM  Author: M. Shah Nawaz
+REM ============================================================
+
+echo.
+echo ===========================================
+echo   Setting up Environment For AI Dashboard
+echo ===========================================
+echo.
+
+REM 1) Create virtual environment
+python -m venv .venv
+if %errorlevel% neq 0 (
+    echo ERROR: Failed to create virtual environment.
+    echo Make sure Python is installed and added to PATH.
+    pause
+    exit /b
+)
+
+REM 2) Activate virtual environment
+call .venv\Scripts\activate
+
+echo.
+echo Virtual environment activated.
+echo.
+
+REM 3) Upgrade pip
+python -m pip install --upgrade pip
+
+REM 4) Install required dependencies
+echo Installing dependencies...
+pip install -r requirements.txt
+
+if %errorlevel% neq 0 (
+    echo ERROR: One or more dependencies failed to install.
+    pause
+    exit /b
+)
+
+echo.
+echo All dependencies installed successfully!
+echo.
+
+REM 5) Run Streamlit app
+echo Starting Streamlit Application...
+streamlit run "%~dp0main.py"
+
+echo.
+echo Application stopped.
+pause
+
+
+
+
+
+
+
+
+
